@@ -8,9 +8,6 @@ Adafruit_Fingerprint finger = Adafruit_Fingerprint(&fSerial);
 void setup() {
   Serial.begin(115200);
 
-  pinMode(relay,OUTPUT);
-  digitalWrite(relay, !relayTrig);
-
   while (!Serial);  
   delay(100);
 
@@ -18,7 +15,10 @@ void setup() {
   finger.begin(57600);
   delay(5);
   if (finger.verifyPassword()) {
+    finger.getTemplateCount();
+    Serial.println(finger.templateCount);
     Serial.println("Found fingerprint sensor!");
+    
   } else {
     Serial.println("Did not find fingerprint sensor :(");
     while (1) { delay(1000); }
@@ -39,8 +39,12 @@ void setup() {
   finger.emptyDatabase();
   Serial.println("delete");
   finger.LEDcontrol(FINGERPRINT_LED_FLASHING,10,FINGERPRINT_LED_RED,10);
-  delay(3000);
+  delay(2000);
   finger.LEDcontrol(FINGERPRINT_LED_ON,200,FINGERPRINT_LED_BLUE);
   
 
+}
+
+void loop(){
+  delay(1000);
 }

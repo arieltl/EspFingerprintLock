@@ -84,7 +84,8 @@ void loop()                     // run over and over again
           while (finger.getImage() != FINGERPRINT_NOFINGER ){
             delay(1);
           }
-          finger.getParameters();
+          finger.getTemplateCount();
+          delay(15);
           enrollFinger(finger.templateCount);
           return;
         }
